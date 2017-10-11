@@ -1,0 +1,9 @@
+<a style="cursor: pointer"class="list-group-item clearfix glowing" [class.selected]="selected" (click)="onLocationSelect()">
+  <div class="text-left col-md-10">
+    <h4 class="list-group-item-heading">{{ loc.address }}</h4>
+    <p class="list-group-item-text">{{ loc.latitude + ', ' + loc.longitude }}</p>
+  </div>
+  <div class="text-right col-md-2">
+    <button type="button" class="btn btn-danger" (click)="onLocationDelete(index)">x</button>
+  </div>
+</a>

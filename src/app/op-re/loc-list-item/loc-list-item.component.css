@@ -1,0 +1,3 @@
+.glowing:focus, .glowing:hover, .form-control.glowing:focus, .glowing.selected {
+  background-color: transparent;
+ }

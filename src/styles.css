@@ -1,1 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.btn-fresh {
+  background-color: #d81b60;
+  border-color: #d81b60;
+  color: white;
+}
+.btn-fresh:hover,
+.btn-fresh:focus,
+.btn-fresh:active,
+.btn-fresh.active {
+  background-color: #c11856;
+  border-color: #ab154c;
+  color: white;
+}
+.btn-fresh.disabled:hover,
+.btn-fresh.disabled:focus,
+.btn-fresh.disabled:active,
+.btn-fresh.disabled.active,
+.btn-fresh[disabled]:hover,
+.btn-fresh[disabled]:focus,
+.btn-fresh[disabled]:active,
+.btn-fresh[disabled].active,
+fieldset[disabled] .btn-fresh:hover,
+fieldset[disabled] .btn-fresh:focus,
+fieldset[disabled] .btn-fresh:active,
+fieldset[disabled] .btn-fresh.active {
+  background-color: #d81b60;
+  border-color: #d81b60;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 50%;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 14px;
+  line-height: 1.33;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 16px;
+  line-height: 1.33;
+}
+.btn-circle.btn-xxl {
+  width: 170px;
+  height: 170px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+}
+.glowing:focus, .glowing:hover, .form-control.glowing:focus, .glowing.selected {
+  background-color: transparent;   
+  border-color: #d81b60;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #d81b60;
+  outline: 0 none;
+}

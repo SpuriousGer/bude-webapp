@@ -1,0 +1,68 @@
+import { NgModule } from '@angular/core';
+import { MdAutocompleteModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule, MdInputModule, MdRadioModule, MdSelectModule, MdSliderModule, MdSlideToggleModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdListModule, MdGridListModule, MdCardModule, MdTabsModule, MdButtonModule, MdButtonToggleModule, MdChipsModule, MdIconModule, MdProgressSpinnerModule, MdProgressBarModule, MdDialogModule, MdTooltipModule, MdSnackBarModule, MdTableModule, MdSortModule, MdPaginatorModule } from '@angular/material';
+import 'hammerjs';
+
+@NgModule({
+  imports: [
+    MdAutocompleteModule,
+    MdCheckboxModule,
+    MdDatepickerModule,
+    MdInputModule,
+    MdRadioModule,
+    MdSelectModule,
+    MdSliderModule,
+    MdSlideToggleModule,
+    MdMenuModule,
+    MdSidenavModule,
+    MdToolbarModule,
+    MdListModule,
+    MdGridListModule,
+    MdCardModule,
+    MdTabsModule,
+    MdButtonModule,
+    MdButtonToggleModule,
+    MdChipsModule,
+    MdIconModule,
+    MdProgressSpinnerModule,
+    MdProgressBarModule,
+    MdDialogModule,
+    MdTooltipModule,
+    MdSnackBarModule,
+    MdTableModule,
+    MdSortModule,
+    MdPaginatorModule,
+    MdNativeDateModule
+  ],
+  exports: [
+    MdAutocompleteModule,
+    MdCheckboxModule,
+    MdDatepickerModule,
+    MdInputModule,
+    MdRadioModule,
+    MdSelectModule,
+    MdSliderModule,
+    MdSlideToggleModule,
+    MdMenuModule,
+    MdSidenavModule,
+    MdToolbarModule,
+    MdListModule,
+    MdGridListModule,
+    MdCardModule,
+    MdTabsModule,
+    MdButtonModule,
+    MdButtonToggleModule,
+    MdChipsModule,
+    MdIconModule,
+    MdProgressSpinnerModule,
+    MdProgressBarModule,
+    MdDialogModule,
+    MdTooltipModule,
+    MdSnackBarModule,
+    MdTableModule,
+    MdSortModule,
+    MdPaginatorModule,
+    MdNativeDateModule
+  ],
+  declarations: []
+})
+export class MaterialModule { }

@@ -1,0 +1,111 @@
+<div class="row form-group">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="col-md-7">
+      <div class="row">
+        <div class="row" *ngIf="true"><button type="button" class="btn btn-danger" (click)="changeState()">Stop/Resume Recording</button></div>
+        <div class="row" *ngIf="f.valid || !f.valid"><button type="button" class="btn btn-danger" (click)="formToConsole()">Console Form</button></div>
+        <div class="row" *ngIf="fServ.replayRunning"><button type="button" class="btn btn-danger" (click)="fServ.stopReplay()">Stop Replay</button></div>
+        <div class="row" *ngIf="fServ.replayRunning"><button type="button" class="btn btn-danger" (click)="fServ.skipToNext()">Skip Step</button></div>
+        <h2>Mandat erfassen</h2>
+        <div class="col-md-6">
+          <div class="row form-group" ngModelGroup="basic">
+            <input type="text" class="form-control glowing" id="kunde" name="kunde" placeholder="Kunde" tabindex="1" ngModel required>
+            <input type="text" class="form-control glowing" id="ansprechpartner" name="ansprechpartner" placeholder="Ansprechpartner beim Kunden" tabindex="2" ngModel required>
+          </div>
+          <h4>Abrechnung</h4>
+          <div class="row form-group" ngModelGroup="financials">
+            <input type="text" class="form-control glowing" id="preis" name="preis" placeholder="Preis pro Monat" tabindex="5" ngModel required>
+            <label for="rechungsfrequenz">Abrechnungszyklus:</label>
+            <select class="form-control glowing" id="rechungsfrequenz" name="rechungsfrequenz" tabindex="7" ngModel required>
+              <option [value]="freq" *ngFor="let freq of invoiceFrequency">{{ freq }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row form-group" ngModelGroup="basic">
+            <input type="text" class="form-control glowing" id="mandtat_beginn" name="mandtat_beginn" placeholder="Mandatsbeginn" tabindex="3" ngModel required>
+            <input type="text" class="form-control glowing" id="mandtat_ende" name="mandtat_ende" placeholder="Mandatende" tabindex="4" ngModel required>
+          </div>
+          <h4>{{ fServ.replayRunning + ' / ' + fServ.recordingRunning + ' / ' + fServ.timerValue }}</h4>
+          <div class="row form-group" ngModelGroup="financials">
+            <input type="text" class="form-control glowing" id="skonto" name="skonto" placeholder="Skonto (%)" tabindex="6" ngModel required>
+            <label for="abrechnungsart">Rechnungsstellung:</label>
+            <select class="form-control glowing" id="abrechnungsart" name="abrechnungsart" tabindex="8" ngModel required>
+              <option [value]="type" *ngFor="let type of invoiceType">{{ type }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Details</h4>
+        </div>
+        <div class="row" role="group">
+          <div class="col-md-12 form-group">
+            <div class="btn-group btn-group-justified" role="group">
+              <a class="btn btn-danger">Pflichtenheft</a>
+              <a class="btn btn-danger">Preise</a>
+              <a class="btn btn-danger">Abrechnung</a>
+              <a class="btn btn-danger">Statistik</a>
+              <a class="btn btn-danger">Dokumente</a>
+            </div>
+          </div>            
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="row">
+        <div class="media well">
+          <div class="media-body">
+            <div class="media">
+              <!-- <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="'http://maps.google.com/mapfiles/kml/shapes/flag.png'"></agm-marker>
+              </agm-map> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group">
+        <input type="text" class="form-control glowing" name="location" id="location" placeholder="Nach einer Adresse suchen" ngModel required>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-1">
+          <div class="form-group">
+            <label class="control-label form-group">Besuche:</label>
+          </div>
+        </div>
+        <div class="col-md-11">
+          <div class="btn-group btn-group-justified" data-toggle="buttons" role="group">
+            <label class="btn btn-primary" [class.active]="f.value.visitFrequency == 'weekday'"><input type="radio" name="visitFrequency" id="visitFrequency1" ngModel required [value]="'weekday'">Wochentage</label>
+            <label class="btn btn-primary" [class.active]="f.value.visitFrequency == 'monthday'"><input type="radio" name="visitFrequency" id="visitFrequency2" ngModel required [value]="'monthday'">Fixes Datum pro Monat</label>
+            <label class="btn btn-primary" [class.active]="f.value.visitFrequency == 'specificDate'"><input type="radio" name="visitFrequency" id="visitFrequency3" ngModel required [value]="'specificDate'">Spezielles Datum</label>
+          </div>
+        </div>
+      </div>
+      <ng-container [ngSwitch]="f.value.visitFrequency">
+        <ng-container *ngSwitchCase="'weekday'">
+          <div class="row form-group" ngModelGroup="weekday">
+            <div class="btn-group btn-group-justified" data-toggle="buttons" role="group">
+              <label class="btn btn-info" *ngFor="let wday of wdays" [class.active]="(f.value?.weekday && f.value.weekday[wday])"><input type="checkbox" [name]="wday" [id]="wday" ngModel [value]="wday">{{ wday }}</label>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'monthday'">
+          <div class="row form-group" ngModelGroup="monthday">
+            <div class="btn-group btn-group-justified" data-toggle="buttons" role="group">
+              <label class="btn btn-info" *ngFor="let mdayVar of mdays | slice:0:15;let mday = index" [class.active]="(f.value?.monthday && f.value.monthday[(mday+1)])"><input type="checkbox" [name]="(mday+1)" [id]="'mday' + (mday+1)" ngModel [value]="(mday+1)">{{ mday + 1 }}</label>
+            </div>
+            <div class="btn-group btn-group-justified" data-toggle="buttons" role="group">
+              <label class="btn btn-info" *ngFor="let mdayVar of mdays | slice:16;let mday = index" [class.active]="(f.value?.monthday && f.value.monthday[(mday+16)])"><input type="checkbox" [name]="(mday+16)" [id]="'mday' + (mday+16)" ngModel [value]="(mday+16)">{{ mday + 16 }}</label>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <div class="row form-group">
+            <p>Bitte die Art der Besuche wählen</p>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </form>
+</div>

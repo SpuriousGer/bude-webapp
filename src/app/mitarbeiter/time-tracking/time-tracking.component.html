@@ -1,0 +1,19 @@
+<md-grid-list cols="3">
+  <md-grid-tile>
+    <md-button-toggle-group vertical>
+      <md-button-toggle *ngFor="let proj of arrProjects" [value]="proj" name="project">{{ proj }}</md-button-toggle>
+    </md-button-toggle-group>
+  </md-grid-tile>
+  <md-grid-tile>
+    <md-button-toggle-group vertical #group="mdButtonToggleGroup">
+      <md-button-toggle *ngFor="let task of arrTasks" [value]="task" name="task">{{ task }}</md-button-toggle>
+    </md-button-toggle-group>
+  </md-grid-tile>
+  <md-grid-tile>
+    <md-input-container>
+      <input mdInput [mdDatepicker]="myDatepicker">
+      <button mdSuffix [mdDatepickerToggle]="myDatepicker"></button>
+    </md-input-container>
+    <md-datepicker #myDatepicker></md-datepicker>
+  </md-grid-tile>
+</md-grid-list>
